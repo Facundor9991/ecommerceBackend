@@ -1,10 +1,19 @@
 import express from "express"
+import ProductManager from "./Eccomerce"
+
 
 
 const app = express()
 app.use(express.json())
 
-let usuarios = []
+app.get('/products', (req, res) => {
+    res.json()
+})
+
+
+
+
+/* let usuarios = [] ------Anterior
 
 app.get('/api/usuarios', (req, res) => {
     res.json(usuarios)
@@ -42,6 +51,6 @@ app.delete('/api/usuarios/:id', (req, res) =>{
 
     usuarios = usuarios.filter(u => u.id !== id)
     res.send({status: "Aceptado", mensaje: "Usuario eliminado con exito"})
-})
+}) */
 
 app.listen(8080)

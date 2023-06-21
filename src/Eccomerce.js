@@ -1,6 +1,7 @@
-const fs = require("fs"); //novo
+import fs from "fs" //----Nuevo Importador de modulos
+//const fs = require("fs"); //Anterior Importador ComomJS
 
-class ProductManager {
+export default class ProductManager {
   constructor(path) {
     this.products = [];
     this.path = path;
