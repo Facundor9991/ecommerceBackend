@@ -19,11 +19,11 @@ export default class ProductManager {
     if (!title || !description || !price || !thumbnail || !code || !stock) {
       return console.log(
         "Error, caracterisitica incompleta. Introducir datos nuevamente."
-      ); //novo (EN ESTE PUNTO SI CADA CAMPO CONTIENE DATOS SE MUESTRA SI NO, ERROR)
+      );  
     }
     if (this.products.find((product) => product.code === code)) {
-      // ------AQUI SE VALIDA SI: EXISTE O NO UN PRODUCTO CON EL MISMO CODE
-      return console.log("Error, este producto ya existe!"); //novo
+      
+      return console.log("Error, este producto ya existe!"); 
     }
     const product = {
       id: this.getNextID(),
@@ -36,16 +36,16 @@ export default class ProductManager {
     };
 
     this.products.push(product);
-    fs.writeFileSync(this.path, JSON.stringify(this.products)); //novo
+    fs.writeFileSync(this.path, JSON.stringify(this.products)); 
   };
 
   getProductById = (id) => {
-    const products = JSON.parse(fs.readFileSync(this.path, "utf-8")); //novo
-    const [valid] = products.filter((producto) => producto.id === id); //novo
+    const products = JSON.parse(fs.readFileSync(this.path, "utf-8")); 
+    const [valid] = products.filter((producto) => producto.id === id); 
     if (!valid) {
-      //novo ----- EN ESTE PUNTO SI NO ESTA EL PRODUCTO (CON SU ID) IMPRIME LAS SIGUIENTES LINEAS ENTERAS
-      return this.console.log("no encontrado"); //novo
+      
+      return this.console.log("no encontrado"); 
     }
-    return valid; //novo
+    return valid; 
   };
 }
