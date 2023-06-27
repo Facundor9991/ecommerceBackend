@@ -1,56 +1,54 @@
-import express from "express"
-import ProductManager from "./Eccomerce"
+import express from "express";
+import  ProductManager  from "./Eccomerce.js";
 
+const manager = new ProductManager("./src/productos.json");
 
+const app = express();
+app.use(express.json());
 
-const app = express()
-app.use(express.json())
+//-------------CODIGO DE PRUEBA------------
+app.get('/', async (req, res) => {
 
-app.get('/products', (req, res) => {
-    res.json()
+    const limit = parseInt(req.query.limit)
+
+    const products = await manager.getProducts()
+
+    
+
+    if(!limit) return res.json(products)
+
+    if(limit) return res.json(products.slice(0, limit))
+
+    
+    
 })
 
 
+app.get("/productos", async (req, res) => {
+  const limit = parseInt(req.query.limit);
 
+  const products = await manager.getProducts();
 
-/* let usuarios = [] ------Anterior
+  if (!limit) return res.json(products);
 
-app.get('/api/usuarios', (req, res) => {
-    res.json(usuarios)
-})
+  if (limit) return res.json(products.slice(0, limit));
+});
 
-app.post('/api/usuarios', (req, res) => {
-    const usuario = req.body
+app.get("/productos/:id", async (req, res) => {
+  const products = await manager.getProducts();
 
-    usuarios.push(usuario)
-    res.status(201).json({status: 'confirmado', mensaje: 'usuario creado'})
-})
+  const id = parseInt(req.params.id);
 
-app.put('/api/usuarios/:id', (req, res) => {
-    const id = parseInt(req.params.id) 
-    const usuario = req.body
+  const product = products.find((element) => element.id === id);
 
-    const usuarioIdx = usuarios.findIndex(u => u.id === id)
-    if(usuarioIdx <0){
-        return res.status(404).json({status: "error", mensaje: "Usuario no encontrado"})
-    }
+  if (!products.some((element) => element.id === id))
+    return res.json({
+      id: id,
+      message: "El producto solicitado no esta disponible",
+    });
 
-    usuarios[usuarioIdx] = usuario
+  return res.send(product);
+});
 
-
-    res.json({status: "Aceptado", mensaje: "actualizando..."})
-})
-
-app.delete('/api/usuarios/:id', (req, res) =>{
-    const id = parseInt(req.params.id)
-
-    const usuarioIdx = usuarios.findIndex(u => u.id === id)
-    if(usuarioIdx <0){
-        return res.status(404).json({status: "error", mensaje: "Usuario no encontrado"})
-    }
-
-    usuarios = usuarios.filter(u => u.id !== id)
-    res.send({status: "Aceptado", mensaje: "Usuario eliminado con exito"})
-}) */
-
-app.listen(8080)
+app.listen(8089);
+console.log('De PrOnTo FlAsH')
