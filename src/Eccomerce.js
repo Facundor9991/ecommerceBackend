@@ -1,20 +1,18 @@
-import fs from "fs" //------- Importador de modulos------------
+import fs from "fs"; //------- Importador de modulos------------
 
 export default class ProductManager {
   constructor(path) {
-    this.products = []
+    this.products = [];
     this.path = path;
-    
   }
 
-
   getProducts = () => {
-    return JSON.parse(fs.readFileSync(this.path, "utf-8")); 
+    return JSON.parse(fs.readFileSync(this.path, "utf-8"));
   };
 
   getNextID = async () => {
     let count = this.products.length;
-    return ++count; 
+    return ++count;
   };
 
   addProduct = (title, description, price, thumbnail, code, stock) => {
