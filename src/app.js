@@ -1,5 +1,5 @@
 import express from "express";
-import ProductManager from "./Eccomerce.js";
+import ProductManager from "./manager/Eccomerce.js";
 
 const manager = new ProductManager("./src/productos.json");
 
@@ -27,7 +27,7 @@ app.get("/productos", async (req, res) => {
   if (limit) return res.json(products.slice(0, limit));
 });
 
-app.get("/productos/:id", async (req, res) => {
+app.get("/producto/:id", async (req, res) => {
   const products = await manager.getProducts();
 
   const id = parseInt(req.params.id);
