@@ -1,6 +1,13 @@
 import express from "express";
 import ProductManager from "./manager/Eccomerce.js";
 
+//--------------------NUEVO 30/6
+
+import products from './routes/products.js'
+import cart from './routes/carts.js'
+//---------------------------
+
+
 const manager = new ProductManager("./src/productos.json");
 
 const app = express();
@@ -42,6 +49,15 @@ app.get("/producto/:id", async (req, res) => {
 
   return res.send(product);
 });
+
+
+//--------------------NUEVO 30/6
+app.use('/api/products', products)
+app.use('/api/carts', cart)
+
+//--------------------
+
+
 
 app.listen(8080);
 console.log("De PrOnTo FlAsH");
