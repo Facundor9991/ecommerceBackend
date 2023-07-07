@@ -2,7 +2,7 @@
 
 
 import { Router } from 'express'
-import ProductManager from '../manager/Eccomerce'
+import ProductManager from '../manager/Eccomerce.js'
 
 const router = Router()
 const productManager = new ProductManager()

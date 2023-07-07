@@ -1,7 +1,7 @@
 //--------------------NUEVO 30/6
 
 
-import FileManager from "./fManager"
+import FileManager from "./fManager.js"
 
 export default class CartManager extends FileManager {
     
