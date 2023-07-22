@@ -35,8 +35,10 @@ export default class ProductManager {
       stock,
     };
 
+    this.products = JSON.parse(fs.readFileSync(this.path, "utf-8"))
     this.products.push(product);
     fs.writeFileSync(this.path, JSON.stringify(this.products)); 
+
   };
 
   getProductById = (id) => {
