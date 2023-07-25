@@ -52,4 +52,48 @@ router.post('/', async (req, res) => {
     res.send(result)
 })
 
+router.put("/:id", async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const updatedProductData = req.body;
+    
+    const updatedProduct = productManager.updateProduct(id, updatedProductData);
+    if (!updatedProduct) {
+      return res.json({
+        message: "Producto no encontrado",
+      });
+    }
+    
+    return res.json(updatedProduct);
+  } catch (error) {
+    res.send(error);
+  }
+
+  
+
+
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    
+    const isDeleted = productManager.deleteProduct(id);
+    if (!isDeleted) {
+      return res.json({
+        message: "Producto no encontrado",
+      });
+    }
+    
+    return res.json({
+      message: "Producto eliminado correctamente",
+    });
+  } catch (error) {
+    res.send(error);
+  }
+
+});
+
+
+
 export default router

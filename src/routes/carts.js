@@ -13,10 +13,10 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:idc/:idp', async (req, res) => {
-    const idc = parseInt(req.params.idc)
-    const idp = parseInt(req.params.idp)
+    const cartId = parseInt(req.params.idc)
+    const productId = parseInt(req.params.idp)
 
-    const result = await cartManager.addProduct(idc, idp)
+    const result = await cartManager.addProduct(cartId, productId)
     res.send(result)
 })
 

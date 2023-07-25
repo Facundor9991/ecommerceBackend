@@ -79,4 +79,30 @@ export default class ProductManager {
     }
     return valid; 
   };
+
+
+
+  //ACTUALIZAR
+  updateProduct = (id, updatedProductData) => {
+    const products = this.getProducts();
+    const index = products.findIndex((product) => product.id === id);
+    if (index === -1) {
+      return null; // Producto no encontrado
+    }
+    products[index] = {
+      ...products[index],
+      ...updatedProductData,
+    };
+    fs.writeFileSync(this.path, JSON.stringify(products));
+    return products[index]; // Producto actualizado
+  };
+
+
+  //BORRAR
+  deleteProduct = (id) => {
+    const products = this.getProducts();
+    const updatedProducts = products.filter((product) => product.id !== id);
+    fs.writeFileSync(this.path, JSON.stringify(updatedProducts));
+    return true; // Indicar que el producto fue eliminado correctamente
+  };
 }
