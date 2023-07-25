@@ -11,22 +11,40 @@ export default class ProductManager {
   };
 
   getNextID = async () => {
-    let count = this.products.length;
-    return ++count;
+
+    //let count = this.products.length;
+    //return ++count;
+
+    if (fs.existsSync(this.path)) {
+      this.products = JSON.parse(fs.readFileSync(this.path, "utf-8"));
+    } else {
+      this.products = [];
+    }
+
+    // Encontrar el producto con el ID más alto y sumarle 1 para obtener el siguiente ID único
+    const maxIDProduct = this.products.reduce((prev, current) =>
+      prev.id > current.id ? prev : current
+    );
+
+    return maxIDProduct.id + 1;
+
   };
 
-  addProduct = (title, description, price, thumbnail, code, stock) => {
+  addProduct = async (title, description, price, thumbnail, code, stock) => {
     if (!title || !description || !price || !thumbnail || !code || !stock) {
       return console.log(
-        "Error, caracterisitica incompleta. Introducir datos nuevamente."
-      );  
+        "Error, característica incompleta. Introducir datos nuevamente."
+      );
     }
     if (this.products.find((product) => product.code === code)) {
-      
-      return console.log("Error, este producto ya existe!"); 
+      return console.log("Error, este producto ya existe!");
     }
+  
+
+    const nextID = await this.getNextID();
     const product = {
-      id: this.getNextID(),
+      //id: this.getNextID(),
+      id: nextID,
       title,
       description,
       price,
@@ -34,12 +52,23 @@ export default class ProductManager {
       code,
       stock,
     };
-
-    this.products = JSON.parse(fs.readFileSync(this.path, "utf-8"))
+  
+    // Cargar los productos existentes del archivo JSON si el archivo existe
+    if (fs.existsSync(this.path)) {
+      this.products = JSON.parse(fs.readFileSync(this.path, "utf-8"));
+    } else {
+      this.products = [];
+    }
+  
+    // Agregar el nuevo producto al array de productos
     this.products.push(product);
-    fs.writeFileSync(this.path, JSON.stringify(this.products)); 
-
+  
+    // Escribir el array actualizado de productos al archivo JSON
+    fs.writeFileSync(this.path, JSON.stringify(this.products));
   };
+
+
+
 
   getProductById = (id) => {
     const products = JSON.parse(fs.readFileSync(this.path, "utf-8")); 
