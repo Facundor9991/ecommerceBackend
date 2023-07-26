@@ -41,6 +41,8 @@ class FileManager {
         return fs.promises.writeFile(this.filename, JSON.stringify(list))
     }
 
+    
+
 }
 
 export default FileManager

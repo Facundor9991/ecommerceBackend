@@ -1,8 +1,11 @@
 import fs from "fs"; //------- Importador de modulos------------
+import FileManager from "./fManager.js";
 
 export default class ProductManager {
   constructor(path) {
+    
     this.products = [];
+
     this.path = path;
   }
 
