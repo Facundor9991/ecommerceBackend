@@ -67,6 +67,7 @@ if(
     getProductsByCartId(cartId) {
         this.carts = this.getcarts()
         const cart = this.carts.find((c) => c.id === cartId);
+       //console.log('aqui estoy', this.carts)
         return cart ? cart.products : [];
     }
 
