@@ -1,5 +1,5 @@
 import fs from "fs"; //------- Importador de modulos------------
-import FileManager from "./fManager.js";
+
 
 export default class ProductManager {
   constructor(path) {
@@ -10,7 +10,24 @@ export default class ProductManager {
   }
 
   getProducts = () => {
-    return JSON.parse(fs.readFileSync(this.path, "utf-8"));
+    //return JSON.parse(fs.readFileSync(this.path, "utf-8"));
+    try {
+      // Verificar que this.path esté definido y sea una cadena válida.
+      if (!this.path || typeof this.path !== 'string') {
+        throw new Error('La ruta del archivo no está definida correctamente.');
+      }
+
+      // Leemos el archivo de forma sincrónica y obtenemos los datos en formato de texto (utf8).
+      const data = fs.readFileSync(this.path, 'utf-8');
+      // Procesar la información del archivo aquí...
+      return JSON.parse(data);
+    } catch (err) {
+      console.error('Error al leer el archivo:', err);
+      return null; // o cualquier valor de retorno apropiado para indicar un fallo
+    }
+  
+
+    
   };
 
   getNextID = async () => {
@@ -24,9 +41,15 @@ export default class ProductManager {
       this.products = [];
     }
 
+    if(this.products.length === 0){
+      //si aca esto esta vacio el siguinte sera el 1 y asi sucesivamente
+      return 1;
+    }
+    
+
     // Encontrar el producto con el ID más alto y sumarle 1 para obtener el siguiente ID único
     const maxIDProduct = this.products.reduce((prev, current) =>
-      prev.id > current.id ? prev : current
+      (current.id > prev.id ? current : prev)
     );
 
     return maxIDProduct.id + 1;
@@ -67,7 +90,19 @@ export default class ProductManager {
     this.products.push(product);
   
     // Escribir el array actualizado de productos al archivo JSON
-    fs.writeFileSync(this.path, JSON.stringify(this.products));
+    //fs.writeFileSync(this.path, JSON.stringify(this.products));
+
+    //return product;
+    return new Promise((resolve, reject) => {
+      fs.writeFile(this.path, JSON.stringify(this.products), (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(product);
+        }
+      });
+    });
+  
   };
 
 

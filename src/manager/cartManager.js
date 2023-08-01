@@ -1,8 +1,6 @@
 //--------------------NUEVO 30/6
 
 import fs from 'fs'
-import FileManager from "./fManager.js"
-
 
 
 // En el gestor de carritos (cartManager.js)
@@ -22,17 +20,17 @@ class CartManager {
         };
         
 console.log(this.path)
-        // Cargar los productos existentes del archivo JSON si el archivo existe
+        // Carga los productos existentes del archivo JSON si el archivo existe
         if (fs.existsSync(this.path)) {
             this.carts = JSON.parse(fs.readFileSync(this.path, "utf-8"));
         } else {
             this.carts = []
         }
 
-        // Agregar el nuevo producto al array de productos
+        // Agrega el nuevo producto al array de productos
         this.carts.push(newCart);
 console.log(this.carts)
-        // Escribir el array actualizado de productos al archivo JSON
+        // Escribe  el array actualizado de productos al archivo JSON
         fs.writeFileSync(this.path, JSON.stringify(this.carts));
     };
 
@@ -50,7 +48,7 @@ console.log(this.carts)
         } else {
             return 1
         }
-        // Encontrar el producto con el ID más alto y sumarle 1 para obtener el siguiente ID único
+        // Encunetra el producto con el ID más alto y sumarle 1 para obtener el siguiente ID único
     const maxIDcarts = this.carts.reduce((prev, current) =>
     prev.id > current.id ? prev : current
   );

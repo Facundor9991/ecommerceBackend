@@ -1,0 +1,27 @@
+<h1>Productos</h1>
+<a href="/form-products">Crear producto</a>
+
+
+
+
+        <div class="row">
+            {{#each products}}
+            <div class="col-sm">
+                <div class="card " style="width: 18rem;">
+                    <img src="{{this.thumbnail}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.title}}</h5>
+                        <p class="card-text">{{this.description}}</p>
+                        <p class="card-text">Su precio es: ${{this.price}} </p>
+                        <p class="card-text">Cantidades disponibles: {{this.stock}} </p>
+                        <a href="#" class="btn btn-primary">Comprar</a>
+                    </div>
+                </div>
+            </div>
+   {{/each}}
+        </div>
+
+
+
+
+     
