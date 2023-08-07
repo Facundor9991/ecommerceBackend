@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import ProductManager from '../manager/Eccomerce.js'
+import ProductManager from '../DAO/fManager/Eccomerce.js'
 
 
 const router = Router()

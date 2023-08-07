@@ -2,17 +2,19 @@
 
 
 import { Router } from 'express'
-import ProductManager from '../manager/Eccomerce.js'
+import ProductManager from '../DAO/fManager/Eccomerce.js'
+import { productModel } from '../DAO/mongoManager/models/products.model.js'
 
 const router = Router()
-const productManager = new ProductManager("productos.json")
+//const productManager = new ProductManager("productos.json")
 
 router.get("/", async (req, res) => {
    
     const limit = parseInt(req.query.limit);
   
     try {
-      const products = await productManager.getProducts();
+      //const products = await productManager.getProducts();
+      const products = await productModel.find()
       
       if (!limit) return res.json(products);
       if (limit < -0)
@@ -28,7 +30,9 @@ router.get("/", async (req, res) => {
   router.get("/:id", async (req, res) => {
     try {
         
-      const products = await productManager.getProducts();
+      //const products = await productManager.getProducts();
+      const products = await productModel.getProducts();
+
       const id = parseInt(req.params.id);
       const product = products.find((element) => element.id === id);
   
@@ -48,7 +52,8 @@ router.get("/", async (req, res) => {
 router.post('/', async (req, res) => {
     const data = req.body
     console.log(data)
-    const result = productManager.addProduct(data.title, data.description, data.price, data.thumbnail, data.code, data.stock)
+    //const result = productManager.addProduct(data.title, data.description, data.price, data.thumbnail, data.code, data.stock)
+    const result = await productModel.addProduct(data.title, data.description, data.price, data.thumbnail, data.code, data.stock)
     res.send(result)
 })
 

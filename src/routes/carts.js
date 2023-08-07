@@ -2,8 +2,8 @@
 
 
 import { Router } from 'express'
-import CartManager from '../manager/cartManager.js'
-import ProductManager from '../manager/Eccomerce.js'
+import CartManager from '../DAO/fManager/cartManager.js'
+import ProductManager from '../DAO/fManager/Eccomerce.js'
 
 const router = Router()
 const cartManager = new CartManager('carts.json')
