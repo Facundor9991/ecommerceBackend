@@ -11,8 +11,12 @@ import ProductManager from "./DAO/fManager/Eccomerce.js";
 
 import mongoose from "mongoose";
 mongoose.set('strictQuery', false)
-mongoose.connect('mongodb://admin:admin@localhost:27017', {
-  bdName:'ECOPROYECT'
+const URL = "mongodb+srv://rfacundo770:HNCTFaOamhZ6yyOy@cluster0.cx8ijuc.mongodb.net/?retryWrites=true&w=majority"
+mongoose.connect(URL, {
+
+  dbName:'ecoProy',
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 })
 .then(()=>{
   const httpServer = app.listen(8080);
@@ -23,19 +27,19 @@ mongoose.connect('mongodb://admin:admin@localhost:27017', {
   
   io.on('connection', socket =>{
     socket.on('new-product', async data =>{
-    
+      console.log(data)
       
-      const productManager = new ProductManager()
-      const result = await productManager.addProduct(data.title, data.description, data.price, data.thumbnail, data.code, data.stock)
+      //const productManager = new ProductManager()
+      //const result = await productManager.addProduct(data.title, data.description, data.price, data.thumbnail, data.code, data.stock)
   
-      const products = await productManager.list()
-      io.emit('reload-table', products)
-      console.log(result)
+      //const products = await productManager.list()
+      io.emit('reload-table', data)
+      //console.log(result)
     })
   })
 })
 .catch(e =>{
-  console.log('No se pudo conectar a la base')
+  console.log('No se pudo conectar a la base', e)
 })
 
 

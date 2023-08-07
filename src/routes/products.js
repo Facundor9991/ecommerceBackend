@@ -3,7 +3,7 @@
 
 import { Router } from 'express'
 import ProductManager from '../DAO/fManager/Eccomerce.js'
-import { productModel } from '../DAO/mongoManager/models/products.model.js'
+import { productModel } from '../DAO/mongoManager/models/product.model.js'
 
 const router = Router()
 //const productManager = new ProductManager("productos.json")
