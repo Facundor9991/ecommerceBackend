@@ -55,20 +55,20 @@
 
       const product = {title, description, price, thumbnail, code, stock}
       socket.emit('new-product', product)
+    
     }
-
-    socket.on('reload-table', products =>{
-        console.log(products)
+    socket.on('reload-table', (products) =>{
+        console.log('aqui es product',products)
         const tbody = document.getElementById('tbody')
 
         let html = '';
             products.forEach(product =>{
                 html += `<tr>
-                <th scope="row">${product.id}<./th>
-                <td>${product.title}<./td>
-                <td>${product.description}<./td>
-                <td>${product.price}<./td>
-                <td>${product.stock}<./td>
+                <th scope="row">${product.id}</th>
+                <td>${product.title}</td>
+                <td>${product.description}</td>
+                <td>${product.price}</td>
+                <td>${product.stock}</td>
                 </tr>
                 `
             })

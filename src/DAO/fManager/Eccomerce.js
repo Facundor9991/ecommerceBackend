@@ -1,28 +1,30 @@
 import fs from "fs"; //------- Importador de modulos------------
+import __dirname from "../../utils.js";
 
 
 export default class ProductManager {
   constructor(path) {
     
     this.products = [];
-
-    this.path = path;
+    this.path = path 
+    
   }
 
   getProducts = () => {
+    console.log(this.path)
     //return JSON.parse(fs.readFileSync(this.path, "utf-8"));
     try {
-      // Verificar que this.path esté definido y sea una cadena válida.
-      if (!this.path || typeof this.path !== 'string') {
-        throw new Error('La ruta del archivo no está definida correctamente.');
+      if (fs.existsSync(this.path)) {
+        this.products = JSON.parse(fs.readFileSync(this.path, "utf-8"));
+      } else {
+        this.products = [];
       }
-
-      // Leemos el archivo de forma sincrónica y obtenemos los datos en formato de texto (utf8).
-      const data = fs.readFileSync(this.path, 'utf-8');
+    
       // Procesar la información del archivo aquí...
-      return JSON.parse(data);
+      return this.products;
     } catch (err) {
       console.error('Error al leer el archivo:', err);
+   
       return null; // o cualquier valor de retorno apropiado para indicar un fallo
     }
   

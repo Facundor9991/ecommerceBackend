@@ -1,10 +1,11 @@
 import { Router } from 'express'
 import ProductManager from '../DAO/fManager/Eccomerce.js'
+import __dirname from '../utils.js'
 
 
 const router = Router()
-const path = 'productos.json'
-const productManager = new ProductManager(path)
+
+const productManager = new ProductManager(__dirname + '/bd/productos.json')
 
 
 
