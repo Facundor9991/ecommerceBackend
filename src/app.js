@@ -10,6 +10,8 @@ import carts from "./routes/carts.js";
 import ProductManager from "./DAO/fManager/Eccomerce.js";
 import { productModel } from "./DAO/mongoManager/models/product.model.js";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
+import session from "express-session";
 
 //----------CONSTANTES----------
 
@@ -27,6 +29,12 @@ app.set('views', __dirname + '/views')
 app.set('view engine', 'handlebars')
 app.use('/', viewsRouter)
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser())
+app.use(session({
+
+
+  
+}))
 
 //-----------(--------------)-----------
 
