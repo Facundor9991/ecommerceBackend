@@ -12,6 +12,7 @@ import { productModel } from "./DAO/mongoManager/models/product.model.js";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import session from "express-session";
+import userRouter from "./routes/users.router.js";
 
 //----------CONSTANTES----------
 
@@ -35,6 +36,7 @@ app.use(session({
 
   
 }))
+app.use('/api/users', userRouter)
 
 //-----------(--------------)-----------
 

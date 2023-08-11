@@ -65,7 +65,7 @@ export default class ProductManager {
       id: nextID,
       title,
       description,
-      price,
+      price: parseFloat(price),
       thumbnail,
       code,
       stock,
