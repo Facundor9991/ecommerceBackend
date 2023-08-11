@@ -51,6 +51,10 @@ router.post("/", async (req, res) => {
     data.code,
     data.stock
   );
+  //-------NUEVOS CAMBIOS PARA QUERER GUARDAR ARCHIVOS EN LA BASE DE DATOS
+  // const result = new productModel(data)
+  // await result.save()
+
   res.send(result);
 });
 

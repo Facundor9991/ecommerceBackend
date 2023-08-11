@@ -1,6 +1,7 @@
 import { Router } from "express";
 import ProductManager from "../DAO/fManager/Eccomerce.js";
 import __dirname from "../utils.js";
+import { productModel } from "../DAO/mongoManager/models/product.model.js";
 
 const router = Router();
 const productManager = new ProductManager(__dirname + "/bd/productos.json");
@@ -37,6 +38,11 @@ router.get("/form-products", async (req, res) => {
 
 router.post("/form-products", async (req, res) => {
   const data = req.body;
+
+  //-------NUEVOS CAMBIOS PARA QUERER GUARDAR ARCHIVOS EN LA BASE DE DATOS
+  // const result = new productModel(data)
+  // await result.save()
+
   const result = productManager.addProduct(
     data.title,
     data.description,
