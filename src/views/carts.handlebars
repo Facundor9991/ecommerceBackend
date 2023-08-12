@@ -1,0 +1,15 @@
+<h1>Carrito</h1>
+
+<div>
+    <div>
+        {{#each cartModel}}
+        <div class="card" style="margin: 10px 100px">
+            <div class="card-body">
+                <p class="card-title">{{id}}</p>
+                <p class="card-text">{{quantity}}</p>
+
+            </div>
+        </div>
+    {{/each}}
+    </div>
+</div>

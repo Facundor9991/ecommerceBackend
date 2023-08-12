@@ -1,0 +1,54 @@
+<h1>LaPanna</h1>
+
+<div class="row">
+    
+   
+ 
+    
+    <table>
+     
+        <tbody>
+            {{#each docs}}
+          <div class="col-sm">
+                <div class="card " style="width: 18rem;">
+                    <img src="{{this.thumbnail}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.title}}</h5>
+                        <p class="card-text">{{this.description}}</p>
+                        <p class="card-text">Su precio es: ${{this.price}} </p>
+                        <p class="card-text">Cantidades disponibles: {{this.stock}} </p>
+                        <a href="#" class="btn btn-primary">Añadir al carrito</a>
+                        <a href="#" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </tbody>
+    </table>
+    <script>
+        document.getElementById('form').onsubmit = (e) =>{
+            e.preventDefault()
+            const limit = document.getElementById('query-limit').value
+            const page = document.getElementById('query-page').value
+            const url = `/list?limit=${limit}&page=${page}`
+            window.location.href = url
+        }
+    </script>
+
+
+ <div style="text-align: center;">
+   <form id="form">
+        Limit: <input type="number" id="query-limit" value="{{limit}}"><br>
+        Page: <input type="number" id="query-page" value="{{page}}"><br>
+        <br>
+        <button type="submit">Enviar</button>
+    </form>
+    </div>
+    <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
+    <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+  </ul>
+</nav> 
+
+</div>
