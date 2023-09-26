@@ -1,0 +1,67 @@
+
+
+    <div class="titulos">
+    <h1></h1>
+    <H2></H2>
+    <h2>------------------</h2>
+</div>
+
+<div class="container">
+  <div class="column">
+      <div class="animated-text">
+  <h3></h3>
+</div>
+  </div>
+  <div class="column">
+      <div class="animated-text">
+  <h3></h3>
+</div>
+  </div>
+  <div class="column">
+    <div class="animated-text">
+  <h3></h3>
+</div>
+  </div>
+</div>
+
+<div class="cajachat">
+<i id="username"></i> <input id="chatbox">
+    <div id="logs">
+    </div>
+    </div>
+
+<div class="futer">
+    <footer>
+       <p id="current-time"></p>
+  <p>Todos los derechos reservados &copy; 2023 FJR servicios</p>
+</footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/static/public/index.js"></script>
+<script>
+  // Obtener el elemento del pie de página para mostrar la hora actual
+  const currentTimeElement = document.getElementById('current-time');
+
+  // Función para obtener la hora actual en formato HH:MM:SS
+  function getCurrentTime() {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+  }
+
+  // Actualizar la hora cada segundo
+  setInterval(() => {
+    const currentTime = getCurrentTime();
+    currentTimeElement.textContent = `Hora actual: ${currentTime}`;
+  }, 1000);
+</script>
+
+<script src="/socket.io/socket.io.js"></script>
+
+
+
+<link rel="stylesheet" href="/static/css/estilos.css">

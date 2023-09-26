@@ -1,7 +1,7 @@
 import { Router, query } from "express";
 import ProductManager from "../DAO/fManager/Eccomerce.js";
 import __dirname from "../utils.js";
-import { productModel } from "../DAO/mongoManager/models/product.model.js";
+import  productsModel  from "../DAO/mongoManager/models/product.model.js";
 import CartManager from "../DAO/fManager/cartManager.js";
 const router = Router();
 const productManager = new ProductManager(__dirname + "/bd/productos.json");
@@ -13,8 +13,9 @@ router.get("/", (req, res) => {
 
 router.get("/products", async (req, res) => {
   try {
-    const products = await productManager.getProducts();
-    res.render("products", { products });
+    const products = await productsModel.find().lean().exec();
+    console.log("products", {products})
+    res.render("products",  {products} );
   } catch (err) {
     console.error("Error al obtener productos:", err);
     res.status(500).send("Error al obtener productos");
@@ -24,8 +25,8 @@ router.get("/products", async (req, res) => {
 //--------NUEVA CON PAGINATE--------
 router.get("/list", async (req, res) => {
   try {
-    const page = parseInt(req.query?.page || 1)
-    const limit = parseInt(req.query?.limit || 2)
+    const page = parseInt(req.query?.page || 2)
+    const limit = parseInt(req.query?.limit || 4)
     const queryParams = req.query?.query || ''
     const query = {}
     
@@ -42,7 +43,7 @@ router.get("/list", async (req, res) => {
     //const result = await productModel.paginate({},{ ----- DE ESE MODO FUNCIONA
     //const result = await productModel.paginate(query,{ ---- Y ASI NO
     //NO FUNCIONA AL QUERER FILTRAR POR NOMBRE O PRECIO
-    const result = await productModel.paginate(query,{
+    const result = await productsModel.paginate(query,{
       page,
       limit,
       lean: true
@@ -57,7 +58,7 @@ router.get("/list", async (req, res) => {
 //-----------------------------------------
 router.get("/products_realtime", async (req, res) => {
   try {
-    const products = await productManager.getProducts();
+    const products = await productsModel.find().lean().exec();
     res.render("products_realtime", { products });
   } catch (err) {
     console.error("Error al obtener productos:", err);
@@ -75,18 +76,16 @@ router.post("/form-products", async (req, res) => {
   const data = req.body;
 
   //-------NUEVOS CAMBIOS PARA QUERER GUARDAR ARCHIVOS EN LA BASE DE DATOS
-  // const result = new productModel(data)
-  // await result.save()
+   const result = new productsModel(data)
+   await result.save()
 
-  const result = productManager.addProduct(
-    data.title,
-    data.description,
-    data.price,
-    data.thumbnail,
-    data.code,
-    data.stock
-  );
   res.redirect("/products");
 });
+
+//-------------CHAT--------------
+router.get('/chat', async (req, res) =>{
+  res.render('chat', )
+})
+
 
 export default router;

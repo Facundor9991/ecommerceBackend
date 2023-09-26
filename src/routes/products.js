@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { productModel } from "../DAO/mongoManager/models/product.model.js";
+import  productsModel  from "../DAO/mongoManager/models/product.model.js";
+import ProductManager from "../DAO/fManager/Eccomerce.js";
 
 const router = Router();
 
@@ -7,7 +8,7 @@ router.get("/", async (req, res) => {
   const limit = parseInt(req.query.limit);
 
   try {
-    const products = await productModel.find();
+    const products = await ProductManager.find();
 
     if (!limit) return res.json(products);
     if (limit < -0)
@@ -22,7 +23,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const products = await productModel.getProducts();
+    const products = await productsModel.getProducts();
 
     const id = parseInt(req.params.id);
     const product = products.find((element) => element.id === id);
@@ -43,17 +44,9 @@ router.post("/", async (req, res) => {
   const data = req.body;
   console.log(data);
 
-  const result = await productModel.addProduct(
-    data.title,
-    data.description,
-    data.price,
-    data.thumbnail,
-    data.code,
-    data.stock
-  );
   //-------NUEVOS CAMBIOS PARA QUERER GUARDAR ARCHIVOS EN LA BASE DE DATOS
-  // const result = new productModel(data)
-  // await result.save()
+   const result = new productsModel(data)
+   await result.save()
 
   res.send(result);
 });
@@ -63,7 +56,7 @@ router.put("/:id", async (req, res) => {
     const id = parseInt(req.params.id);
     const updatedProductData = req.body;
 
-    const updatedProduct = productManager.updateProduct(id, updatedProductData);
+    const updatedProduct = productsModel.updateProduct(id, updatedProductData);
     if (!updatedProduct) {
       return res.json({
         message: "Producto no encontrado",
@@ -80,7 +73,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
 
-    const isDeleted = productManager.deleteProduct(id);
+    const isDeleted = productsModel.deleteProduct(id);
     if (!isDeleted) {
       return res.json({
         message: "Producto no encontrado",

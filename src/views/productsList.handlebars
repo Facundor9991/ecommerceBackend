@@ -1,4 +1,4 @@
-<h1>LaPanna</h1>
+<h1>BAKERY94</h1>
 
 <div class="row">
     
@@ -25,15 +25,7 @@
             {{/each}}
         </tbody>
     </table>
-    <script>
-        document.getElementById('form').onsubmit = (e) =>{
-            e.preventDefault()
-            const limit = document.getElementById('query-limit').value
-            const page = document.getElementById('query-page').value
-            const url = `/list?limit=${limit}&page=${page}`
-            window.location.href = url
-        }
-    </script>
+   
 
 
  <div style="text-align: center;">
@@ -52,3 +44,13 @@
 </nav> 
 
 </div>
+
+ <script>
+        document.getElementById('form').onsubmit = (e) =>{
+            e.preventDefault()
+            const limit = document.getElementById('query-limit').value
+            const page = document.getElementById('query-page').value
+            const url = `/list?limit=${limit}&page=${page}`
+            window.location.href = url
+        }
+    </script>
