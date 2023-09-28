@@ -1,13 +1,9 @@
-<h1>Pasteleria</h1>
-
-
-
-
-
+<div style="text-align: center; background-color: #F0E68C; ">
+<h1 style="color: #ff5e00;">Pasteleria</h1>
         <div class="row">
             {{#each products}}
             <div class="col-sm">
-                <div class="card " style="width: 18rem;">
+                <div class="card " style="width: 18rem; margin: 8px;">
                     <img src="{{this.thumbnail}}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{this.title}}</h5>
@@ -21,6 +17,8 @@
             </div>
    {{/each}}
         </div>
+</div>
+
 
 
 

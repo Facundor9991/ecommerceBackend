@@ -1,56 +1,78 @@
-<h1>BAKERY94</h1>
+<h1 style="text-align: center; color: #ff5e00;">BAKERY94</h1>
 
-<div class="row">
-    
-   
- 
-    
-    <table>
-     
-        <tbody>
-            {{#each docs}}
-          <div class="col-sm">
-                <div class="card " style="width: 18rem;">
-                    <img src="{{this.thumbnail}}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">{{this.title}}</h5>
-                        <p class="card-text">{{this.description}}</p>
-                        <p class="card-text">Su precio es: ${{this.price}} </p>
-                        <p class="card-text">Cantidades disponibles: {{this.stock}} </p>
-                        <a href="#" class="btn btn-primary">Añadir al carrito</a>
-                        <a href="#" class="btn btn-primary">Ver detalles</a>
-                    </div>
-                </div>
+<div class="row" style="text-align: center; background-color: #F0E68C;">
+
+  <table>
+    <tbody>
+      {{#each docs}}
+        <div class="col-sm">
+          <div class="card" style="width: 18rem; margin: 8px;">
+            <img src="{{this.thumbnail}}" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">{{this.title}}</h5>
+              <p class="card-text">{{this.description}}</p>
+              <p class="card-text">Su precio es: ${{this.price}} </p>
+              <p class="card-text">Cantidades disponibles: {{this.stock}} </p>
+              <a href="#" class="btn btn-primary">Añadir al carrito</a>
+              <a href="#" class="btn btn-primary">Ver detalles</a>
             </div>
-            {{/each}}
-        </tbody>
-    </table>
-   
+          </div>
+        </div>
+      {{/each}}
+    </tbody>
+  </table>
 
-
- <div style="text-align: center;">
-   <form id="form">
-        Limit: <input type="number" id="query-limit" value="{{limit}}"><br>
-        Page: <input type="number" id="query-page" value="{{page}}"><br>
-        <br>
-        <button type="submit">Enviar</button>
+  <div style="text-align: center;">
+    <form id="form">
+      Limit:
+      <input type="number" id="query-limit" value="{{limit}}" /><br />
+      Page:
+      <input type="number" id="query-page" value="{{page}}" /><br />
+      <br />
+      <button type="submit">Enviar</button>
     </form>
-    </div>
-    <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+  </div>
+  
+  <nav aria-label="Page navigation example" class="d-flex justify-content-center">
   <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
-    <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+    <li class="page-item">
+      <button class="page-link" id="previousPage" type="button">Anterior</button>
+    </li>
+    <li class="page-item">
+      <button class="page-link" id="nextPage" type="button">Siguiente</button>
+    </li>
   </ul>
-</nav> 
+</nav>
+
 
 </div>
+<script>
+  document.getElementById('form').onsubmit = (e) =>{ e.preventDefault() 
+  const limit = document.getElementById('query-limit').value 
+  const page = document.getElementById('query-page').value 
+  const url = `/list?limit=${limit}&page=${page}` 
+  window.location.href = url }
 
- <script>
-        document.getElementById('form').onsubmit = (e) =>{
-            e.preventDefault()
-            const limit = document.getElementById('query-limit').value
-            const page = document.getElementById('query-page').value
-            const url = `/list?limit=${limit}&page=${page}`
-            window.location.href = url
-        }
-    </script>
+
+      document.getElementById('previousPage').addEventListener('click', (e) => {
+    e.preventDefault();
+    const currentPage = parseInt(document.getElementById('query-page').value);
+    if (currentPage > 1) {
+      const newPage = currentPage - 1;
+      document.getElementById('query-page').value = newPage;
+      document.getElementById('form').submit();
+    }
+  });
+
+  document.getElementById('nextPage').addEventListener('click', (e) => {
+    e.preventDefault();
+    const currentPage = parseInt(document.getElementById('query-page').value);
+    const totalPages = 4;
+    if (currentPage < totalPages) {
+      const newPage = currentPage + 1;
+      document.getElementById('query-page').value = newPage;
+      document.getElementById('form').submit();
+    }
+  });
+
+</script>

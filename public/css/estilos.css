@@ -5,3 +5,94 @@ body{
 .center-content {
     text-align: center;
 }
+
+/*Estilos del chat*/
+body{
+    margin: 0%;
+    padding: 0;
+    background-image: url(../img/imgchat.jpg);
+    color: whitesmoke;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+}
+
+.titulos{
+    text-align: center;
+    justify-content: center;
+
+    
+}.cajachat{
+    font-family: 'Times New Roman', Times, serif;
+    width: 300px;
+    height: 400px;
+    background-image: url(../img/imgchat2.jpg);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    justify-content: center;
+    overflow-y: auto;
+  border: 1px solid #000000;
+  border-radius: 10%;
+
+}
+
+@media (min-width: 768px) {
+    .cajachat {
+      width: 50%;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .cajachat {
+      width: 30%;
+    }
+  }
+
+  .container {
+    column-count: 3; /* Define el número de columnas */
+    column-gap: 20px; /* Espacio entre las columnas */
+    display: flex;
+    justify-content: center;
+  }
+  
+  .column {
+    break-inside: avoid; /* Evita que los objetos se dividan en varias columnas */
+    margin-bottom: 20px; /* Espacio entre los objetos */
+    text-align: center;
+    justify-content: center;
+    flex-basis: 33%;
+    padding: 0, 10px;
+  }
+
+
+  /* --------------TEXTO ANIMADO----------------- */
+  .animated-text h3 {
+    animation-name: animate-text; /* Nombre de la animación */
+    animation-duration: 5s; /* Duración de la animación */
+    animation-timing-function: ease-in-out; /* Función de temporización */
+    animation-iteration-count: 5; /* Número de repeticiones (en este caso, infinito) */
+    font-size: 28px;
+    text-align: center;
+  }
+  
+  @keyframes animate-text {
+    0% { opacity: 0; transform: translateY(-20px); } /* Estilo inicial */
+    50% { opacity: 1; transform: translateY(0); } /* Estilo intermedio */
+    100% { opacity: 0; transform: translateY(20px); } /* Estilo final */
+  }
+  
+.audio{
+  text-align: center;
+  margin: 10px;
+}
+
+
+.futer{
+  text-align: center;
+  justify-content: center;
+  margin: 5px;
+  background-color: darkgray;
+  color: black;
+}
